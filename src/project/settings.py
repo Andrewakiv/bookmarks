@@ -32,13 +32,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig',
     'bookmarks.apps.BookmarksConfig'
 ]
 
@@ -129,3 +129,9 @@ LOGIN_REDIRECT_URL = 'bookmarks:dashboard'
 LOGIN_URL = 'accounts:login'  # must create LoginUserView(LoginView) to use it or use accounts/registration/login.html
 # LOGOUT_REDIRECT_URL = 'accounts:logout'
 LOGOUT_URL = 'accounts:logout'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
