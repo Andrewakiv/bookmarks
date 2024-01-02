@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+<div id="header">
+    <span class="logo">Bookmarks</span>
+    {% if user.is_authenticated %}
+    <ul class="menu">
+        <li>
+            <a href="{% url 'bookmarks:dashboard'%}">Dashboard</a>
+        </li>
+        <li>
+            <a href="#">Images</a>
+        </li>
+        <li>
+            <a href="#">People</a>
+        </li>
+    </ul>
+    {% endif %}
+    <span class="user">
+        {% if user.is_authenticated %}
+        Hello {{ user.username }},
+        <form id="logout-form" method="post" action="{% url 'accounts:logout' %}">
+			{% csrf_token %}
+			<button type="submit">logout</button>
+		</form>
+        {% else %}
+        <a href="{% url 'accounts:login' %}">login</a>
+        {% endif %}
+    </span>
+</div>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
