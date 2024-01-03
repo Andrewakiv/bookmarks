@@ -24,16 +24,27 @@
     {% endif %}
     <span class="user">
         {% if user.is_authenticated %}
-        Hello {{ user.username }},
+        Hello <a href="{% url 'accounts:edit' %}">{{ user.username }}</a>,
         <form id="logout-form" method="post" action="{% url 'accounts:logout' %}">
 			{% csrf_token %}
 			<button type="submit">logout</button>
 		</form>
         {% else %}
-        <a href="{% url 'accounts:login' %}">login</a>
+        <a href="{% url 'accounts:login' %}">login</a> |
+        <a href="{% url 'accounts:register' %}">Register</a>
         {% endif %}
     </span>
 </div>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">
+        {{ message|safe }}
+        <a href="#" class="close">x</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
 <div id="content">
     {% block content %}
     {% endblock %}

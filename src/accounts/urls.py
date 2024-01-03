@@ -32,4 +32,7 @@ urlpatterns = [
     ), name='password_reset_confirm'),
     path('password-reset/complete/', PasswordResetCompleteView.as_view(template_name='accounts/password_reset_complete.html'),
          name='password_reset_complete'),
+
+    path('register/', views.register, name='register'),
+    path('edit/', views.edit, name='edit'),
 ]
