@@ -1,5 +1,7 @@
 from django.conf import settings
-from django.db import models
+from django.db import models, IntegrityError
+from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import slugify
 
 
@@ -19,10 +21,17 @@ class Image(models.Model):
         ]
         ordering = ['-created']
 
+    def get_absolute_url(self):
+        return reverse('bookmarks:detail', args=[self.id, self.slug])
+
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
+            try:
+                self.slug = slugify(self.title)
+                super().save(*args, **kwargs)
+            except IntegrityError:
+                self.slug = f"{self.slug}-{timezone.now().strftime('%f')}"
+            super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title

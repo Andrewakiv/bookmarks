@@ -1,8 +1,13 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
+
 from . import views
 
 app_name = 'bookmarks'
 
 urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
+    path('create/', views.image_create, name='create'),
+    path('detail/<int:id>/<slug:slug>/', views.image_detail, name='detail')
 ]
