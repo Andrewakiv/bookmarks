@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bookmarks.apps.BookmarksConfig',
-    'django_extensions'
+    'django_extensions',
+    'easy_thumbnails'
 ]
 
 MIDDLEWARE = [
