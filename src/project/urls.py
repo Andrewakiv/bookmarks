@@ -22,7 +22,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls', namespace='accounts')),
-    path('bookmarks/', include('bookmarks.urls', namespace='bookmarks'))
+    path('bookmarks/', include('bookmarks.urls', namespace='bookmarks')),
+    path('__debug__/', include('debug_toolbar.urls'))
 ]
 
 if settings.DEBUG:
